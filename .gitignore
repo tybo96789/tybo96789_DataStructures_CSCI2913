@@ -46,3 +46,6 @@ Network Trash Folder
 Temporary Items
 .apdisk
 /build/
+nbproject/private/private.properties
+
+nbproject/private/private.xml
