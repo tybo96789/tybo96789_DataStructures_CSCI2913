@@ -3,6 +3,7 @@ package HW_2;
 /**Statistician; Various methods to obtain information about the sequence
  *
  * @author Tyler Atiburcio
+ * @version 1
  */
 public class Statistician {
     
