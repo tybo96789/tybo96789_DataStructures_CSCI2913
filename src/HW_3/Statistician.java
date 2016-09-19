@@ -1,7 +1,5 @@
 package HW_3;
 
-import HW_2.*;
-
 /**Statistician; Various methods to obtain information about the sequence
  *
  * @author Tyler Atiburcio
@@ -99,6 +97,7 @@ public class Statistician {
      * if one statistician is null, return empty Statistician
      * if either statistician is empty, create a new statistician with the non-empty statistician
      * 
+     * PostCondition: Return a new statistician with the information from statistician 1 and 2 
      * 
      * @param s1 Statistician
      * @param s2 Statistician
@@ -108,7 +107,7 @@ public class Statistician {
     {
         Statistician sn = new Statistician();
         try{
-            if(s1.getLength() == 0 && s2.getLength() != 0)
+            if(s1.getLength() == 0 && s2.getLength() != 0)                      //Only pull information from statistician 2 if statistician 1 is empty
             {
                 sn.largest = s2.getLargest();
                 sn.lastEnter = s2.getLastEnter();
@@ -116,7 +115,7 @@ public class Statistician {
                 sn.smallest = s2.getSmallest();
                 sn.sum = s2.getSum();
             }
-            else if(s1.getLength() != 0 && s2.getLength() == 0)
+            else if(s1.getLength() != 0 && s2.getLength() == 0)                 //Only pull information from statistician 1 if statistician 2 is empty
             {
                 sn.largest = s1.getLargest();
                 sn.lastEnter = s1.getLastEnter();
@@ -132,7 +131,7 @@ public class Statistician {
                 sn.smallest = s1.getSmallest() < s2.getSmallest() ? s1.getSmallest() : s2.getSmallest();
                 sn.sum = s1.getSum() + s2.getSum();
             }
-        }catch(NullPointerException e)
+        }catch(NullPointerException e)                                          //If any statistican is null print error message and return empty statistician
         {
             System.err.println("Statistician Invalid!");
             return sn;
