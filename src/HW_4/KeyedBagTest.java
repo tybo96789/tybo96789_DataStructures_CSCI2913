@@ -1,6 +1,6 @@
 package HW_4;
 
-/**
+/**KeyedBag Tester Class
  *
  * @author Tyler Atiburcio
  */
@@ -43,8 +43,13 @@ public class KeyedBagTest {
         System.out.println("Retreive item with the key " + 0 +" Data: " +bag.retrieve(0));
         bag.insert("Hello World", 0);
         
-        
-        
+        //Boundary Case
+        //Use Search, remove, and retrieve on an empty bag
+        System.out.println("\n\nBoundary Case: Use search, remove, and retrieve on an empty bag");
+        KeyedBag emptyBag = new KeyedBag();
+        System.out.println("Find item with the key " + 1 +" found? " +emptyBag.search(1));
+        System.out.println("Retreive item with the key " + 2 +" Data: " +emptyBag.retrieve(1));
+        System.out.println("Remove item with the key " + 2 +" Removed? " +emptyBag.remove(1));
         
         
         
