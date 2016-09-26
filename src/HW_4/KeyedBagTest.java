@@ -1,6 +1,6 @@
 package HW_4;
 
-/**
+/**KeyedBag Tester Class
  *
  * @author Tyler Atiburcio
  */
@@ -17,7 +17,7 @@ public class KeyedBagTest {
         //Standard case
         System.out.println("Normal Case");
         System.out.println("Find item with the key " + 1 +" found? " +bag.search(1));
-        System.out.println("Retreive item with the key " + 2 +" Data: " +bag.retrieve(1));
+        System.out.println("Retrieve item with the key " + 2 +" Data: " +bag.retrieve(1));
         System.out.println("Remove item with the key " + 2 +" Removed? " +bag.remove(2));
         bag.insert("Hello Bag", 2);
         
@@ -29,7 +29,7 @@ public class KeyedBagTest {
         //Boundary Case
         //retieve item with key that doesnt exist in bag
         System.out.println("\n\nBoundary Case: Call reterive item with a key that doenst exist in bag");
-        System.out.println("Retreive item with the key " + 888 +" Data: " +bag.retrieve(888));
+        System.out.println("Retrieve item with the key " + 888 +" Data: " +bag.retrieve(888));
         
         //Boundary Case
         //Remove item with key that doesnt exist in bag
@@ -40,11 +40,16 @@ public class KeyedBagTest {
         //Remove an item in the bag, then call retrieve method with the same key
         System.out.println("\n\nBoundary Case: Call remove item with a key, then call reterive item with the same key");
         System.out.println("Remove item with the key " + 0 +" Removed? " +bag.remove(0));
-        System.out.println("Retreive item with the key " + 0 +" Data: " +bag.retrieve(0));
+        System.out.println("Retrieve item with the key " + 0 +" Data: " +bag.retrieve(0));
         bag.insert("Hello World", 0);
         
-        
-        
+        //Boundary Case
+        //Use Search, remove, and retrieve on an empty bag
+        System.out.println("\n\nBoundary Case: Use search, remove, and retrieve on an empty bag");
+        KeyedBag emptyBag = new KeyedBag();
+        System.out.println("Find item with the key " + 1 +" found? " +emptyBag.search(1));
+        System.out.println("Retrieve item with the key " + 2 +" Data: " +emptyBag.retrieve(1));
+        System.out.println("Remove item with the key " + 2 +" Removed? " +emptyBag.remove(1));
         
         
         

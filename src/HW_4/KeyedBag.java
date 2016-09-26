@@ -21,7 +21,7 @@ public class KeyedBag {
         this.items = 0;
     }
     
-    /**Default contrustor that creates a bag with the inital capacity of 10
+    /**Default constructor that creates a bag with the inital capacity of 10
      * 
      */
     public KeyedBag()
@@ -42,6 +42,13 @@ public class KeyedBag {
         this.key[items++] = key;
     }
     
+    /**Given the unique key check to see if that particular key exists in the bag
+     * PreConditon: No duplicate keys exists in the bag
+     * PostCondition: Return true or false if key exists in the bag
+     * 
+     * @param key The unique key
+     * @return boolean; True if key exists in the bag; False if it doesnt exist
+     */
     public boolean search(int key)
     {
         for (int i = 0; i < items; i++)
@@ -49,6 +56,14 @@ public class KeyedBag {
         return false;
     }
     
+    /**Retrieves the corresponding data with the associated key
+     * PreCondition: No duplicate keys exists in the bag
+     * PostCondition: Return the data the is associated with the key
+     * Default behavior: If parameter is not found the bag, return 'null'
+     * 
+     * @param key The unique key that is associated with a item/data
+     * @return The data that is associated with the key
+     */
     public String retrieve(int key)
     {
         for (int i = 0; i < items; i++)
@@ -56,6 +71,11 @@ public class KeyedBag {
         return null;
     }
     
+    /**Remove item corresponding to the key (Parameter)
+     * 
+     * @param key Unique key associated with an item in the bag
+     * @return Boolean; True, if item was removed, False if item was not removed
+     */
     public boolean remove(int key)
     {
         for (int i = 0; i < items; i++)
