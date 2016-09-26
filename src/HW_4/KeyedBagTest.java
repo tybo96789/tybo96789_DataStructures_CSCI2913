@@ -8,7 +8,6 @@ public class KeyedBagTest {
     
     public static void main(String[] args) {
         
-        
         KeyedBag bag = new KeyedBag();
         bag.insert("Hello World", 0);
         bag.insert("Hello Web", 1);
