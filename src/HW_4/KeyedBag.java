@@ -1,16 +1,19 @@
 package HW_4;
 
-/**
+/**Keyed Bag; Store a collection of items with basic insert, search, retrieve, and remove methods
  *
  * @author Tyler Atiburcio
  */
 public class KeyedBag {
     
-    private String[] data;
-    private int[] key;
+    private String[] data;          //A string array to hold the data corresponding to a unique key
+    private int[] key;              //A int array to hold the corresponding key to the corresponding data
     private int items; 
 
-    
+    /**A Keyed Bag constructor that creates a bag with the inital capacity of the parameter 
+     * 
+     * @param capacity Create the inital size of the bag with the given parameter
+     */
     public KeyedBag(int capacity)
     {
         this.data = new String[capacity];
@@ -18,11 +21,21 @@ public class KeyedBag {
         this.items = 0;
     }
     
+    /**Default contrustor that creates a bag with the inital capacity of 10
+     * 
+     */
     public KeyedBag()
     {
         this(10);
     }
     
+    /**Insert a copy of the data and corresponding unique key at the at the first available empty slot
+     * PreCondtion: The bag is not full; The bag does not already contain the same unique key to what the method is being passed to
+     * PostCondition: A new copy of the entry has been added to the bag with the given key
+     * 
+     * @param data The data to be stored with the unique key
+     * @param key The unique key to be associated data
+     */
     public void insert(String data, int key)
     {
         this.data[items] = data;

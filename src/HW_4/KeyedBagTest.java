@@ -32,11 +32,18 @@ public class KeyedBagTest {
         System.out.println("Retreive item with the key " + 888 +" Data: " +bag.retrieve(888));
         
         //Boundary Case
+        //Remove item with key that doesnt exist in bag
+        System.out.println("\n\nBoundary Case: Call remove item with a key that doenst exist in bag");
+        System.out.println("Remove item with the key " + 999 +" Removed? " +bag.remove(999));
+        
+        //Boundary Case
         //Remove an item in the bag, then call retrieve method with the same key
         System.out.println("\n\nBoundary Case: Call remove item with a key, then call reterive item with the same key");
         System.out.println("Remove item with the key " + 0 +" Removed? " +bag.remove(0));
         System.out.println("Retreive item with the key " + 0 +" Data: " +bag.retrieve(0));
         bag.insert("Hello World", 0);
+        
+        
         
         
         
