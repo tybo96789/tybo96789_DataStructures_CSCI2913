@@ -52,6 +52,11 @@ public class IntNode {
     public void setNext(IntNode next) {
         this.next = next;
     }
+
+    @Override
+    public String toString() {
+        return "IntNode{" + "data=" + data + ", next=" + next + '}';
+    }
     
     /**
      * 
@@ -64,10 +69,16 @@ public class IntNode {
         else if(head.getNext() == null) return head;
         else {
             
-            for (IntNode cursor = head; cursor != null; cursor = cursor.getNext()) {
-                
+            IntNode prev = null, temp = null;
+            while(head != null)
+            {
+                temp = head.getNext();
+                head.setNext(prev);
+                prev = head;
+                if(temp == null) return head;
+                head = temp;
             }
-             
+            return head;
         }
     }
     
