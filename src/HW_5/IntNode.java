@@ -52,11 +52,6 @@ public class IntNode {
     public void setNext(IntNode next) {
         this.next = next;
     }
-
-    @Override
-    public String toString() {
-        return "IntNode{" + "data=" + data + ", next=" + next + '}';
-    }
     
     /**
      * 
