@@ -19,7 +19,7 @@ public class EvaluateBooleanExpressions {
         while(scan.hasNext())
             for(char c : scan.next().toCharArray())
             {
-                System.out.print(c);
+                //System.out.print(c);
                 if(c != ' ' && c !=')') charStack.push(c);
                 else if(c == ')')
                 {
@@ -39,14 +39,24 @@ public class EvaluateBooleanExpressions {
         System.out.println("");
         return booStack.pop();
         */
-        if(!charStack.isEmpty() && charStack.peek() == '!') return !booStack.pop();
+        //System.out.println(charStack.isEmpty() + "  "+ charStack.peek());
+        //if(!charStack.isEmpty() && charStack.peek() == '!') return !booStack.pop();
+        if(!charStack.isEmpty() && charStack.peek() == '!')
+        {
+            charStack.pop();
+            booStack.push(!booStack.pop());
+        }
+        //System.out.println(charStack.peek());
+        //System.out.println(booStack.peek());
+//        while(!charStack.isEmpty())
+        //    evaluateStack(charStack,booStack);
         return booStack.pop();
     }
     
     private static void evaluateStack(Stack<Character> sc, Stack<Boolean> sb)
     {
         //System.out.println("calling");
-        sc.pop();//Pop closing ')'
+        if(sc.peek() == ')')sc.pop();//Pop closing ')'
         Character data = sc.pop();
         int num[] = new int[2];
         int i = num.length-1;
@@ -71,7 +81,7 @@ public class EvaluateBooleanExpressions {
         if(complexop != ' ')
             opr = complexop+""+op;
         else opr = ""+op;
-        //System.out.println(opr);
+        System.out.println(opr);
         switch(opr)
         {
             case "<":
@@ -97,6 +107,9 @@ public class EvaluateBooleanExpressions {
                 break;
             case "||":
                 sb.push(sb.pop() || sb.pop());
+                break;
+            case "!=":
+                sb.push(num[0] != num[1]);
                 break;
             case"(":
             default:
