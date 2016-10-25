@@ -26,7 +26,7 @@ public class EvaluateBooleanExpressions {
                     charStack.push(c);
                     evaluateStack(charStack,booStack);
                 }
-                else charStack.push(c);
+                //else charStack.push(c);
             }
         /*while(!charStack.isEmpty())
             System.out.print(charStack.pop());
@@ -45,6 +45,7 @@ public class EvaluateBooleanExpressions {
         {
             charStack.pop();
             booStack.push(!booStack.pop());
+            System.out.println("Table Flip");
         }
         //System.out.println(charStack.peek());
         //System.out.println(booStack.peek());
@@ -59,34 +60,34 @@ public class EvaluateBooleanExpressions {
         //System.out.println("calling");
         //System.out.println(sc.peek());
         if(sc.peek() == ')')sc.pop();//Pop closing ')'
-        Character data = sc.pop();
+        Character data = ' ';
+        
         String num[] = {"",""};
         int i = num.length-1;
-        char op = ' ';
-        char complexop = ' ';
-        while(data != '(' && !sc.isEmpty())
+        String opr = "";
+        while((data = sc.pop() )!= '(' && !sc.isEmpty())
         {
-            //System.out.print(data);
-            if(data == ' ')
-            {
-                data = sc.pop();
-                continue;
-            }
-
+            //System.out.println("data: " + data);
+            //System.out.println(op +""+ complexop);
+//            if(data == ' ')
+//            {
+//                data = sc.pop();
+//                continue;
+//            }
             if(Character.isDigit(data)) num[i--] += data;
-            else if(op == ' ') op = data;
-            else complexop = data;
-            data = sc.pop();
+            else opr += data;
+            //data = sc.pop();
         }
         //System.out.println(op);
-        String opr;
-        if(complexop != ' ')
-            opr = complexop+""+op;
-        else opr = ""+op;
+//        if(complexop != ' ')
+//            opr = complexop+""+op;
+//        else opr = ""+op;
         System.out.println(opr);
+        opr.trim();
         int num1, num2;
         if(!(num[0].isEmpty() && num[1].isEmpty()))
         {
+            System.out.println("int compare");
             num1 = Integer.parseInt(num[0]);
             num2 = Integer.parseInt(num[1]);
             switch(opr)
@@ -103,10 +104,10 @@ public class EvaluateBooleanExpressions {
                 case"==":
                     sb.push(num1 == num2);
                     break;
-                case"<=":
+                case"=<":
                     sb.push(num1 <= num2);
                     break;
-                case">=":
+                case"=>":
                     sb.push(num1 >= num2);
                     break;
                 case "&&":
@@ -115,16 +116,19 @@ public class EvaluateBooleanExpressions {
                 case "||":
                     sb.push(sb.pop() || sb.pop());
                     break;
-                case "!=":
+                case "=!":
                     sb.push(num1 != num2);
                     break;
-                case"(":
+                //case"(":
                 default:
-                    System.err.println("DumbAss");
+                    System.err.println(opr);
                     return;
             }
         }
         else{
+            System.out.println("Boo Stack compare");
+            //System.out.println(sc.peek());
+            //if((op + "" + complexop).trim().length() != 2) throw new Error("Malformed operator");
             switch(opr)
             {
                 case "!":    
@@ -139,12 +143,12 @@ public class EvaluateBooleanExpressions {
                 case "||":
                     sb.push(sb.pop() || sb.pop());
                     break;
-                case "!=":
+                case "=!":
                     sb.push(sb.pop() != sb.pop());
                     break;
-                case"(":
+                //case"(":
                 default:
-                    System.err.println("DumbAss");
+                    System.err.println(opr);
                     return;
             }
         }
@@ -154,6 +158,8 @@ public class EvaluateBooleanExpressions {
         System.out.println(temp);
         sb.push(temp);
         */
+        //if(sc.peek() != null) 
+        //   if(sc.peek() == '(') sc.pop();
     }
     
     
