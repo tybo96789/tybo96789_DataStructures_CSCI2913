@@ -48,17 +48,19 @@ public class EvaluateBooleanExpressions {
         }
         //System.out.println(charStack.peek());
         //System.out.println(booStack.peek());
-//        while(!charStack.isEmpty())
-        //    evaluateStack(charStack,booStack);
+        while(!charStack.isEmpty())
+            evaluateStack(charStack,booStack);
+        if(!charStack.isEmpty()) throw new Error("Um something broke...");
         return booStack.pop();
     }
     
     private static void evaluateStack(Stack<Character> sc, Stack<Boolean> sb)
     {
         //System.out.println("calling");
+        //System.out.println(sc.peek());
         if(sc.peek() == ')')sc.pop();//Pop closing ')'
         Character data = sc.pop();
-        int num[] = new int[2];
+        String num[] = {"",""};
         int i = num.length-1;
         char op = ' ';
         char complexop = ' ';
@@ -71,7 +73,7 @@ public class EvaluateBooleanExpressions {
                 continue;
             }
 
-            if(Character.isDigit(data)) num[i--] = data;
+            if(Character.isDigit(data)) num[i--] += data;
             else if(op == ' ') op = data;
             else complexop = data;
             data = sc.pop();
@@ -82,41 +84,71 @@ public class EvaluateBooleanExpressions {
             opr = complexop+""+op;
         else opr = ""+op;
         System.out.println(opr);
-        switch(opr)
+        int num1, num2;
+        if(!(num[0].isEmpty() && num[1].isEmpty()))
         {
-            case "<":
-                sb.push(num[0] < num[1]);
-                break;
-            case">":
-                sb.push(num[0] > num[1]);
-                break;
-            case "!":    
-                sb.push(!sb.pop());
-                break;
-            case"==":
-                sb.push(num[0] == num[1]);
-                break;
-            case"<=":
-                sb.push(num[0] <= num[1]);
-                break;
-            case">=":
-                sb.push(num[0] >= num[1]);
-                break;
-            case "&&":
-                sb.push(sb.pop() && sb.pop());
-                break;
-            case "||":
-                sb.push(sb.pop() || sb.pop());
-                break;
-            case "!=":
-                sb.push(num[0] != num[1]);
-                break;
-            case"(":
-            default:
-                System.err.println("DumbAss");
-                return;
+            num1 = Integer.parseInt(num[0]);
+            num2 = Integer.parseInt(num[1]);
+            switch(opr)
+            {
+                case "<":
+                    sb.push(num1 < num2);
+                    break;
+                case">":
+                    sb.push(num1 > num2);
+                    break;
+                case "!":    
+                    sb.push(!sb.pop());
+                    break;
+                case"==":
+                    sb.push(num1 == num2);
+                    break;
+                case"<=":
+                    sb.push(num1 <= num2);
+                    break;
+                case">=":
+                    sb.push(num1 >= num2);
+                    break;
+                case "&&":
+                    sb.push(sb.pop() && sb.pop());
+                    break;
+                case "||":
+                    sb.push(sb.pop() || sb.pop());
+                    break;
+                case "!=":
+                    sb.push(num1 != num2);
+                    break;
+                case"(":
+                default:
+                    System.err.println("DumbAss");
+                    return;
+            }
         }
-        //if(!sc.isEmpty() && (sc.peek() == '|' || sc.peek() == '&')) evaluateStack(sc,sb);
+        else{
+            switch(opr)
+            {
+                case "!":    
+                    sb.push(!sb.pop());
+                    break;
+                case"==":
+                    sb.push(sb.pop() == sb.pop());
+                    break;
+                case "&&":
+                    sb.push(sb.pop() && sb.pop());
+                    break;
+                case "||":
+                    sb.push(sb.pop() || sb.pop());
+                    break;
+                case "!=":
+                    sb.push(sb.pop() != sb.pop());
+                    break;
+                case"(":
+                default:
+                    System.err.println("DumbAss");
+                    return;
+            }
+        }
+        //if(!sc.isEmpty() && sc.peek() != ')') evaluateStack(sc,sb);
         /*
         boolean temp = sb.pop();
         System.out.println(temp);
