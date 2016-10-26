@@ -13,18 +13,17 @@ public class EvaluateBooleanExpressions {
         if(s == null || s.isEmpty()) return false;
         //If not empty and not null
         s = s.trim();
-        Scanner scan = new Scanner(s);
+        //Scanner scan = new Scanner(s);
         Stack<Character> charStack = new Stack<>();
         Stack<Boolean> booStack = new Stack<>();
-        while(scan.hasNext())
-            for(char c : scan.next().toCharArray())
+        //while(scan.hasNext())
+            for(char c : s.toCharArray())
             {
                 //System.out.print(c);
-                if(c != ' ' && c !=')') charStack.push(c);
-                else if(c == ')')
+                if(c != ' ')
                 {
                     charStack.push(c);
-                    evaluateStack(charStack,booStack);
+                    if(c == ')')evaluateStack(charStack,booStack);
                 }
                 //else charStack.push(c);
             }
@@ -55,7 +54,7 @@ public class EvaluateBooleanExpressions {
         return booStack.pop();
     }
     
-    private static void evaluateStack(Stack<Character> sc, Stack<Boolean> sb)
+    private synchronized static void  evaluateStack(Stack<Character> sc, Stack<Boolean> sb)
     {
         //System.out.println("calling");
         //System.out.println(sc.peek());
@@ -68,7 +67,7 @@ public class EvaluateBooleanExpressions {
         while((data = sc.pop() )!= '(' && !sc.isEmpty())
         {
             //System.out.println("data: " + data);
-            //System.out.println(op +""+ complexop);
+            //System.out.println(num[0] +"    "+ num[1]);
 //            if(data == ' ')
 //            {
 //                data = sc.pop();
