@@ -7,6 +7,8 @@ package HW_6;
 public class EvaluateBooleanExpressions {
     
     /**Method to push boolean expression to stack
+     * PRECONDITON: Boolean expression is formated correct
+     * POSTCONDITION: Return the result of the inputted boolean expression
      * 
      * @param s Boolean Expression
      * @return boolean; Result of the Boolean Expression
@@ -22,12 +24,9 @@ public class EvaluateBooleanExpressions {
                     charStack.push(c);
         while(!charStack.isEmpty())
             evaluateStack(charStack,booStack);
-        if(!charStack.isEmpty())
-            {
-                System.err.println("Stack not Empty!");
-                return false;
-            }
-        return booStack.isEmpty() ? false : booStack.pop();
+        
+        //IF the boolean stack is empty or the stack of chars that used to contain the boolean expression is not empty return false
+        return booStack.isEmpty() || !charStack.isEmpty() ? false : booStack.pop(); 
     }
     
     /**Evaluates the boolean expression a simple expression at a time "()"
