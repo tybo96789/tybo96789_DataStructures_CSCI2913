@@ -1,92 +1,59 @@
 package HW_6;
 
-import java.util.Scanner;
-
-/**
+/**Use stacks to evaluate boolean expressions
  *
  * @author Tyler Atiburcio
  */
 public class EvaluateBooleanExpressions {
     
+    /**Method to push boolean expression to stack
+     * 
+     * @param s Boolean Expression
+     * @return boolean; Result of the Boolean Expression
+     */
     public static boolean evaluateBooleanExpression(String s)
     {
-        if(s == null || s.isEmpty()) return false;
-        //If not empty and not null
-        s = s.trim();
-        //Scanner scan = new Scanner(s);
+        if(s == null || s.isEmpty()) return false;  //If not empty and not null
+        s = s.trim();   //Remove any extra trailing space before and after the expression
         Stack<Character> charStack = new Stack<>();
         Stack<Boolean> booStack = new Stack<>();
-        //while(scan.hasNext())
             for(char c : s.toCharArray())
-            {
-                //System.out.print(c);
                 if(c != ' ')
-                {
                     charStack.push(c);
-                    if(c == ')')evaluateStack(charStack,booStack);
-                }
-                //else charStack.push(c);
-            }
-        /*while(!charStack.isEmpty())
-            System.out.print(charStack.pop());
-        */
-        /*
-        for(char c: s.toCharArray())
-            charStack.push(c);
-        while(!charStack.isEmpty())
-            System.out.print(charStack.pop());
-        System.out.println("");
-        return booStack.pop();
-        */
-        //System.out.println(charStack.isEmpty() + "  "+ charStack.peek());
-        //if(!charStack.isEmpty() && charStack.peek() == '!') return !booStack.pop();
-        if(!charStack.isEmpty() && charStack.peek() == '!')
-        {
-            charStack.pop();
-            booStack.push(!booStack.pop());
-            System.out.println("Table Flip");
-        }
-        //System.out.println(charStack.peek());
-        //System.out.println(booStack.peek());
         while(!charStack.isEmpty())
             evaluateStack(charStack,booStack);
-        if(!charStack.isEmpty()) throw new Error("Um something broke...");
-        return booStack.pop();
+        if(!charStack.isEmpty())
+            {
+                System.err.println("Stack not Empty!");
+                return false;
+            }
+        return booStack.isEmpty() ? false : booStack.pop();
     }
     
-    private synchronized static void  evaluateStack(Stack<Character> sc, Stack<Boolean> sb)
+    /**Evaluates the boolean expression a simple expression at a time "()"
+     * 
+     * @param sc A stack of the characters that make up boolean expression
+     * @param sb Current Stack of boolean values of already evaluated expressions
+     */
+    private static void evaluateStack(Stack<Character> sc, Stack<Boolean> sb)
     {
-        //System.out.println("calling");
-        //System.out.println(sc.peek());
-        if(sc.peek() == ')')sc.pop();//Pop closing ')'
+        //If Negation is on the top of the stack pop current boolean stack and push the negation of that
+        if(sc.peek() == '!') sb.push(!sb.pop());
         Character data = ' ';
-        
         String num[] = {"",""};
         int i = num.length-1;
         String opr = "";
         while((data = sc.pop() )!= '(' && !sc.isEmpty())
         {
-            //System.out.println("data: " + data);
-            //System.out.println(num[0] +"    "+ num[1]);
-//            if(data == ' ')
-//            {
-//                data = sc.pop();
-//                continue;
-//            }
-            if(Character.isDigit(data)) num[i--] += data;
+            if(data == ' ' || data == ')' || data == '(')
+                continue;
+            else if(Character.isDigit(data)) num[i--] += data;
             else opr += data;
-            //data = sc.pop();
         }
-        //System.out.println(op);
-//        if(complexop != ' ')
-//            opr = complexop+""+op;
-//        else opr = ""+op;
-        System.out.println(opr);
         opr.trim();
         int num1, num2;
-        if(!(num[0].isEmpty() && num[1].isEmpty()))
+        if(!(num[0].isEmpty() && num[1].isEmpty())) //If operation is not dealing with numbers
         {
-            System.out.println("int compare");
             num1 = Integer.parseInt(num[0]);
             num2 = Integer.parseInt(num[1]);
             switch(opr)
@@ -97,9 +64,6 @@ public class EvaluateBooleanExpressions {
                 case">":
                     sb.push(num1 > num2);
                     break;
-                case "!":    
-                    sb.push(!sb.pop());
-                    break;
                 case"==":
                     sb.push(num1 == num2);
                     break;
@@ -109,25 +73,15 @@ public class EvaluateBooleanExpressions {
                 case"=>":
                     sb.push(num1 >= num2);
                     break;
-                case "&&":
-                    sb.push(sb.pop() && sb.pop());
-                    break;
-                case "||":
-                    sb.push(sb.pop() || sb.pop());
-                    break;
                 case "=!":
                     sb.push(num1 != num2);
                     break;
-                //case"(":
                 default:
-                    System.err.println(opr);
                     return;
             }
         }
         else{
-            System.out.println("Boo Stack compare");
-            //System.out.println(sc.peek());
-            //if((op + "" + complexop).trim().length() != 2) throw new Error("Malformed operator");
+            //If not dealing with number comparesions, then its a boolean comparesion
             switch(opr)
             {
                 case "!":    
@@ -145,23 +99,16 @@ public class EvaluateBooleanExpressions {
                 case "=!":
                     sb.push(sb.pop() != sb.pop());
                     break;
-                //case"(":
                 default:
-                    System.err.println(opr);
                     return;
             }
         }
-        //if(!sc.isEmpty() && sc.peek() != ')') evaluateStack(sc,sb);
-        /*
-        boolean temp = sb.pop();
-        System.out.println(temp);
-        sb.push(temp);
-        */
-        //if(sc.peek() != null) 
-        //   if(sc.peek() == '(') sc.pop();
     }
     
-    
+    /** Generic Stack
+     * 
+     * @param <T> Data Type Going in
+     */
     public static class Stack<T>
     {
         private Node<T> leader;
@@ -199,7 +146,11 @@ public class EvaluateBooleanExpressions {
             return this.leader == null;
         }
     }
-
+    
+    /**Generic Link List
+     * 
+     * @param <V> Type of node (Type of data being held)
+     */
     private static class Node<V>{
         private Node next;
         private V data;
