@@ -24,7 +24,24 @@ public class PriorityQueueTest {
         for (int i = 0; i < pq.getItems(); i++) {
             System.out.println(pq.getData()[i] + " " + pq.getPriority()[i] + " " + pq.getEntered()[i]);
         }
-
+        
+        System.out.println("\n------------");
+        
+        //Boundary Case
+        //Tree is empty
+        pq = new PriorityQueue();
+        System.out.println(pq.remove());
+        
+        System.out.println("\n------------");
+        
+        //Boundary Case
+        //One element in heap is removed and removed is called again
+        pq = new PriorityQueue();
+        pq.add(1, 0);
+        System.out.println(pq.remove());
+        System.out.println(pq.remove());
+        
+        System.out.println("\n-------------");
     }
 
 }

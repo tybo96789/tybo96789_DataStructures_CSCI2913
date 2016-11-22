@@ -31,6 +31,11 @@ public class PriorityQueue<T> {
         //If inital data array is empty
         if(this.data == null)
             this.data =  new Object[10];
+        if(priority  < 0 )
+        {
+            System.err.println("Priority Should be Non-Negative!");
+            return;
+        }
         //Double the size of all arrays if their are more items than array space
         if(items == this.data.length)
         {
