@@ -20,8 +20,13 @@ public class EvaluateBooleanExpressions {
         Stack<Character> charStack = new Stack<>();
         Stack<Boolean> booStack = new Stack<>();
             for(char c : s.toCharArray())
+            {
                 if(c != ' ')
                     charStack.push(c);
+                if(c == ')')
+                    evaluateStack(charStack,booStack);
+            }
+            
         while(!charStack.isEmpty())
             evaluateStack(charStack,booStack);
         
@@ -51,7 +56,7 @@ public class EvaluateBooleanExpressions {
         }
         opr.trim();
         int num1, num2;
-        if(!(num[0].isEmpty() && num[1].isEmpty())) //If operation is not dealing with numbers
+        if(!(num[0].isEmpty() && num[1].isEmpty())) //If operation is dealing with numbers
         {
             num1 = Integer.parseInt(num[0]);
             num2 = Integer.parseInt(num[1]);
